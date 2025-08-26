@@ -99,7 +99,7 @@ function initializeApp() {
     // Clean URL after loading settings (optional)
     if (urlSettings) {
         const cleanURL = new URL(window.location.href);
-        cleanURL.searchParams.delete('settings');
+        cleanURL.searchParams.delete('s');
         window.history.replaceState({}, document.title, cleanURL.toString());
     }
 }
@@ -592,19 +592,34 @@ function updateQuestionInputRange() {
 
 // Function to encode current settings to URL parameters
 function encodeSettingsToURL() {
-    const settings = {
-        categories: Array.from(selectedCategories),
-        minSpiciness: minSpiciness,
-        maxSpiciness: maxSpiciness,
-        minKinkiness: minKinkiness,
-        maxKinkiness: maxKinkiness,
-        selectionMode: currentSelectionMode || 0
+    // Category mapping to single letters
+    const categoryMap = {
+        'introduction': 'i',
+        'lusty': 'l',
+        'bdsm': 'b',
+        'banana': 'n',
+        'shell': 's',
+        'couple': 'c',
+        'wouldyourather': 'w'
     };
     
-    // Encode settings as base64 to make URL cleaner
-    const encoded = btoa(JSON.stringify(settings));
+    // Build compact string: categories + spiciness range + kinkiness range + mode
+    let compact = '';
+    
+    // Categories (7 characters max, 1 for each category)
+    Object.keys(categoryMap).forEach(category => {
+        compact += selectedCategories.has(category) ? categoryMap[category] : '-';
+    });
+    
+    // Add ranges and mode (5 digits: minSpicy, maxSpicy, minKinky, maxKinky, mode)
+    compact += minSpiciness.toString();
+    compact += maxSpiciness.toString();  
+    compact += minKinkiness.toString();
+    compact += maxKinkiness.toString();
+    compact += (currentSelectionMode || 0).toString();
+    
     const currentURL = new URL(window.location.href);
-    currentURL.searchParams.set('settings', encoded);
+    currentURL.searchParams.set('s', compact);
     
     return currentURL.toString();
 }
@@ -612,15 +627,52 @@ function encodeSettingsToURL() {
 // Function to decode settings from URL parameters
 function decodeSettingsFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    const encodedSettings = urlParams.get('settings');
+    const compact = urlParams.get('s');
     
-    if (!encodedSettings) {
+    if (!compact || compact.length < 12) {
+        console.log('Invalid or missing compact string'); // Debug log
         return null;
     }
     
     try {
-        const decoded = atob(encodedSettings);
-        return JSON.parse(decoded);
+        // Category mapping (reverse)
+        const categoryMap = {
+            'i': 'introduction',
+            'l': 'lusty', 
+            'b': 'bdsm',
+            'n': 'banana',
+            's': 'shell',
+            'c': 'couple',
+            'w': 'wouldyourather'
+        };
+        
+        // Parse categories (first 7 characters)
+        const categories = [];
+        for (let i = 0; i < 7 && i < compact.length; i++) {
+            const char = compact[i];
+            if (char !== '-' && categoryMap[char]) {
+                categories.push(categoryMap[char]);
+            }
+        }
+        
+        // Parse ranges and mode (characters 7-11)
+        const minSpiciness = parseInt(compact[7]) || 1;
+        const maxSpiciness = parseInt(compact[8]) || 5;
+        const minKinkiness = parseInt(compact[9]) || 1;
+        const maxKinkiness = parseInt(compact[10]) || 5;
+        const selectionMode = parseInt(compact[11]) || 0;
+        
+        const decoded = {
+            categories,
+            minSpiciness,
+            maxSpiciness,
+            minKinkiness,
+            maxKinkiness,
+            selectionMode
+        };
+        
+        return decoded;
+        
     } catch (error) {
         console.warn('Failed to decode settings from URL:', error);
         return null;
@@ -639,36 +691,51 @@ function applySettingsFromURL(settings) {
         saveSelectedCategories(); // Save the loaded settings
     }
     
-    // Apply spiciness range
+    // Apply spiciness range - update both variables and sliders
     if (typeof settings.minSpiciness === 'number' && settings.minSpiciness >= 1 && settings.minSpiciness <= 5) {
         minSpiciness = settings.minSpiciness;
-        document.getElementById('minSpicinessSlider').value = minSpiciness;
+        const minSlider = document.getElementById('minSpicinessSlider');
+        if (minSlider) {
+            minSlider.value = minSpiciness;
+        }
     }
     if (typeof settings.maxSpiciness === 'number' && settings.maxSpiciness >= 1 && settings.maxSpiciness <= 5) {
         maxSpiciness = settings.maxSpiciness;
-        document.getElementById('maxSpicinessSlider').value = maxSpiciness;
+        const maxSlider = document.getElementById('maxSpicinessSlider');
+        if (maxSlider) {
+            maxSlider.value = maxSpiciness;
+        }
     }
     
-    // Apply kinkiness range
+    // Apply kinkiness range - update both variables and sliders
     if (typeof settings.minKinkiness === 'number' && settings.minKinkiness >= 1 && settings.minKinkiness <= 5) {
         minKinkiness = settings.minKinkiness;
-        document.getElementById('minKinkinessSlider').value = minKinkiness;
+        const minSlider = document.getElementById('minKinkinessSlider');
+        if (minSlider) {
+            minSlider.value = minKinkiness;
+        }
     }
     if (typeof settings.maxKinkiness === 'number' && settings.maxKinkiness >= 1 && settings.maxKinkiness <= 5) {
         maxKinkiness = settings.maxKinkiness;
-        document.getElementById('maxKinkinessSlider').value = maxKinkiness;
+        const maxSlider = document.getElementById('maxKinkinessSlider');
+        if (maxSlider) {
+            maxSlider.value = maxKinkiness;
+        }
     }
     
     // Apply selection mode
     if (typeof settings.selectionMode === 'number' && settings.selectionMode >= 0 && settings.selectionMode <= 2) {
-        document.getElementById('modeSlider').value = settings.selectionMode;
+        const modeSlider = document.getElementById('modeSlider');
+        if (modeSlider) {
+            modeSlider.value = settings.selectionMode;
+        }
         // Update the current selection mode variable if it exists
         if (typeof currentSelectionMode !== 'undefined') {
             currentSelectionMode = settings.selectionMode;
         }
     }
     
-    // Update UI to reflect the loaded settings
+    // Force update UI displays
     updateSlidersUI();
     updateCategoriesUI();
     updateSelectionModeUI();
@@ -683,22 +750,22 @@ function updateSlidersUI() {
 
 function updateCategoriesUI() {
     Object.keys(questionDatabase).forEach(category => {
-        const categoryDiv = document.querySelector(`#${category}`).parentElement;
         const checkbox = document.getElementById(category);
+        const categoryDiv = checkbox ? checkbox.parentElement : null;
         
-        if (selectedCategories.has(category)) {
-            checkbox.checked = true;
-            categoryDiv.classList.add('selected');
-        } else {
-            checkbox.checked = false;
-            categoryDiv.classList.remove('selected');
+        if (checkbox && categoryDiv) {
+            if (selectedCategories.has(category)) {
+                checkbox.checked = true;
+                categoryDiv.classList.add('selected');
+            } else {
+                checkbox.checked = false;
+                categoryDiv.classList.remove('selected');
+            }
         }
     });
 }
 
 function updateSelectionModeUI() {
-    // This assumes you have a function to update the mode description
-    // You'll need to call the appropriate function from question-selector.js
     if (typeof updateModeDescription === 'function') {
         updateModeDescription();
     }
