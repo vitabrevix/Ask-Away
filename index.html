@@ -23,6 +23,38 @@
             </div>
             <h1>🎯 Question Generator</h1>
         </div>
+		
+		<div class="controls">
+			<button class="btn btn-primary" onclick="generateQuestionWithMode()">Generate Question</button>
+			<button class="btn btn-secondary" onclick="resetQuestionsWithMode()">Reset Used Questions</button>
+		</div>
+		
+		<div class="reset-warning" id="resetWarning">
+            All questions from selected categories have been used. Click "Reset Used Questions" to start over.
+        </div>
+
+        <div class="specific-question-container">
+			<div class="specific-question-title">🎯 Get Specific Question</div>
+			<div class="specific-question-controls">
+				<input type="number" min="1" placeholder="Loading..." class="question-id-input" id="questionIdInput">
+				<button class="btn btn-accent" onclick="getSpecificQuestion()">Get Question #</button>
+			</div>
+		</div>
+
+		<div class="question-container">
+			<div class="question no-question" id="question">
+				Select categories above and click "Generate Question" to get started!
+			</div>
+		</div>
+		
+		<div class="stats">
+            <span id="questionsUsed">Questions used: 0</span>
+            <span id="questionsAvailable">Available questions: 0</span>
+        </div>
+		
+		<div class="share-container">
+			<button class="btn btn-accent" onclick="shareSettings()">📋 Share Settings</button>
+		</div>
         
         <div class="categories" id="categories">
             <!-- Categories will be populated by JavaScript -->
@@ -145,38 +177,6 @@
 					Questions are selected completely at random
 				</div>
 			</div>
-		</div>
-
-        <div class="controls">
-			<button class="btn btn-primary" onclick="generateQuestionWithMode()">Generate Question</button>
-			<button class="btn btn-secondary" onclick="resetQuestionsWithMode()">Reset Used Questions</button>
-		</div>
-
-        <div class="specific-question-container">
-			<div class="specific-question-title">🎯 Get Specific Question</div>
-			<div class="specific-question-controls">
-				<input type="number" min="1" placeholder="Loading..." class="question-id-input" id="questionIdInput">
-				<button class="btn btn-accent" onclick="getSpecificQuestion()">Get Question #</button>
-			</div>
-		</div>
-
-		<div class="question-container">
-			<div class="question no-question" id="question">
-				Select categories above and click "Generate Question" to get started!
-			</div>
-		</div>
-
-        <div class="reset-warning" id="resetWarning">
-            All questions from selected categories have been used. Click "Reset Used Questions" to start over.
-        </div>
-
-        <div class="stats">
-            <span id="questionsUsed">Questions used: 0</span>
-            <span id="questionsAvailable">Available questions: 0</span>
-        </div>
-		
-		<div class="share-container">
-			<button class="btn btn-accent" onclick="shareSettings()">📋 Share Settings</button>
 		</div>
     </div>
 
