@@ -1,0 +1,83 @@
+/* Button styles and controls */
+
+.controls {
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+	margin-bottom: 30px;
+	flex-wrap: wrap;
+}
+
+.btn {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 25px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.btn-primary {
+	background: linear-gradient(45deg, #4299e1, #38b2ac);
+	color: white;
+}
+
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 20px rgba(66, 153, 225, 0.3);
+}
+
+.btn-secondary {
+	background: #e2e8f0;
+	color: #4a5568;
+}
+
+.btn-secondary:hover {
+	background: #dadada;
+	transform: translateY(-2px);
+}
+
+.btn-accent {
+    background: linear-gradient(45deg, #ed8936, #dd6b20);
+    color: white;
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(237, 137, 54, 0.3);
+}
+
+/* Dark mode button styles */
+body.dark-mode .btn-primary {
+    background: linear-gradient(45deg, #2b6cb0, #2c7a7b);
+    color: #e2e8f0;
+}
+
+body.dark-mode .btn-primary:hover {
+    box-shadow: 0 10px 20px rgba(43, 108, 176, 0.3);
+}
+
+body.dark-mode .btn-secondary {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #3f3768;
+}
+
+/* Mobile button optimizations */
+@media (max-width: 768px) {
+	.controls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.btn {
+		padding: 15px 20px;
+		font-size: 1.1rem;
+	}
+}

@@ -1,0 +1,325 @@
+/* Tooltip styles - Fixed version */
+.tooltip-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    z-index: 1000;
+}
+
+.tooltip-trigger, .category-tooltip-trigger {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4299e1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: help;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-left: 8px;
+    z-index: 1;
+}
+
+/* When hovering/showing tooltip, bump up the z-index of the active trigger */
+.tooltip-trigger:hover,
+.category-tooltip-trigger:hover {
+    z-index: 10001; /* Higher than tooltip to prevent other triggers from overlapping */
+}
+
+.tooltip-trigger:hover, .category-tooltip-trigger:hover {
+    background: #3182ce;
+    transform: scale(1.1);
+}
+
+.tooltip, .category-tooltip {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d3748;
+    color: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    z-index: 10000;  /* High z-index for tooltip */
+    text-align: left;
+    pointer-events: none;
+    
+    /* Responsive width */
+    width: max-content;
+    min-width: 280px;
+    max-width: min(90vw, 500px);
+}
+
+.tooltip::before, .category-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #2d3748;
+    z-index: 10001; /* Highest z-index for arrow */
+}
+
+/* Enhanced hover behavior */
+.tooltip-trigger:hover .tooltip,
+.tooltip-trigger:focus .tooltip,
+.category-tooltip-trigger:hover .category-tooltip,
+.category-tooltip-trigger:focus .category-tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* When a tooltip is active, lower z-index of all other triggers */
+.tooltip-container:has(.tooltip-trigger:hover) .tooltip-trigger:not(:hover),
+.category-item:has(.category-tooltip-trigger:hover) .category-tooltip-trigger:not(:hover),
+/* Fallback for browsers that don't support :has() */
+body:hover .tooltip-trigger:not(:hover),
+body:hover .category-tooltip-trigger:not(:hover) {
+    z-index: 1 !important;
+}
+
+/* Remove hover on tooltip itself to prevent interference */
+.tooltip:hover,
+.category-tooltip:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.tooltip h4, .category-tooltip h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4fd1c7;
+    white-space: nowrap;
+}
+
+.tooltip p, .category-tooltip p {
+    margin: 0;
+    color: #e2e8f0;
+    white-space: normal;
+}
+
+.tooltip-level {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.tooltip-level-name {
+    font-weight: 600;
+    color: #cbd5e0;
+    white-space: nowrap;
+}
+
+.tooltip-level-desc {
+    color: #e2e8f0;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+/* Touch device support */
+.tooltip-trigger, .category-tooltip-trigger {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Desktop - larger tooltips */
+@media (min-width: 1024px) {
+    .tooltip, .category-tooltip {
+        min-width: 400px;
+        max-width: 600px;
+        padding: 25px 30px;
+        font-size: 15px;
+        width: max-content;
+    }
+    
+    .tooltip-level {
+        grid-template-columns: 120px 1fr;
+        gap: 15px;
+        margin-bottom: 12px;
+    }
+    
+    .tooltip h4, .category-tooltip h4 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Tablet - medium tooltips */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .tooltip, .category-tooltip {
+        min-width: 350px;
+        max-width: 500px;
+        padding: 22px 28px;
+        width: max-content;
+    }
+    
+    .tooltip-level {
+        grid-template-columns: 100px 1fr;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile - compact but readable tooltips */
+@media (max-width: 767px) {
+    .tooltip, .category-tooltip {
+        min-width: 280px;
+        max-width: 95vw;
+        font-size: 13px;
+        padding: 18px 22px;
+        line-height: 1.4;
+        width: auto;
+        
+        /* Better positioning for mobile */
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 35px;
+    }
+    
+    .tooltip-level {
+        grid-template-columns: 80px 1fr;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .tooltip-level-name {
+        font-size: 12px;
+    }
+    
+    .tooltip-level-desc {
+        font-size: 13px;
+    }
+    
+    .tooltip h4, .category-tooltip h4 {
+        font-size: 15px;
+        margin-bottom: 10px;
+        white-space: normal;
+    }
+    
+    /* Ensure tooltips don't go off-screen on mobile */
+    .tooltip, .category-tooltip {
+        left: 0;
+        right: 0;
+        margin: 0 10px;
+        transform: none;
+    }
+    
+    .tooltip::before, .category-tooltip::before {
+        left: 20px;
+        transform: none;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .tooltip, .category-tooltip {
+        margin: 0 5px;
+        min-width: auto;
+        font-size: 12px;
+        padding: 15px 18px;
+        width: auto;
+    }
+    
+    .tooltip-level {
+        grid-template-columns: 70px 1fr;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+    
+    .tooltip-level-name {
+        font-size: 11px;
+    }
+    
+    .tooltip-level-desc {
+        font-size: 12px;
+    }
+}
+
+/* Dark mode tooltip styles */
+body.dark-mode .tooltip-trigger, 
+body.dark-mode .category-tooltip-trigger {
+    background: #4fd1c7;
+    color: #1a202c;
+}
+
+body.dark-mode .tooltip-trigger:hover, 
+body.dark-mode .category-tooltip-trigger:hover {
+    background: #38b2ac;
+}
+
+body.dark-mode .tooltip, 
+body.dark-mode .category-tooltip {
+    background: #1a202c;
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .tooltip::before, 
+body.dark-mode .category-tooltip::before {
+    border-top-color: #1a202c;
+}
+
+/* Ensure parent containers don't interfere */
+.category-item {
+    position: relative;
+    z-index: auto;
+}
+
+.spiciness-container, 
+.kinkiness-container, 
+.specific-question-container {
+    position: relative;
+    z-index: auto;
+}
+
+/* Improved touch behavior for mobile devices */
+@media (hover: none) and (pointer: coarse) {
+    .tooltip-trigger, .category-tooltip-trigger {
+        position: relative;
+    }
+    
+    /* Show tooltip on touch/tap - always below on mobile */
+    .tooltip-trigger:active .tooltip,
+    .category-tooltip-trigger:active .category-tooltip {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        bottom: auto !important;
+        top: 100% !important;
+        margin-top: 10px !important;
+    }
+    
+    /* Ensure arrows point up when tooltip is below */
+    .tooltip-trigger:active .tooltip::before,
+    .category-tooltip-trigger:active .category-tooltip::before {
+        top: -8px !important;
+        bottom: auto !important;
+        border-top: none !important;
+        border-bottom: 8px solid #2d3748 !important;
+    }
+    
+    body.dark-mode .tooltip-trigger:active .tooltip::before,
+    body.dark-mode .category-tooltip-trigger:active .category-tooltip::before {
+        border-bottom-color: #1a202c !important;
+    }
+    
+    /* Keep tooltip visible for a bit after touch */
+    .tooltip, .category-tooltip {
+        transition: opacity 0.3s ease 0.5s, visibility 0.3s ease 0.5s;
+    }
+}

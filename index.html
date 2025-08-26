@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Away</title>
+	<link rel="stylesheet" href="main-style.css">
+	<link rel="stylesheet" href="buttons-style.css">
+	<link rel="stylesheet" href="sliders-style.css">
+	<link rel="stylesheet" href="categories-style.css">
+	<link rel="stylesheet" href="questions-style.css">
+	<link rel="stylesheet" href="tooltips-style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-checkbox">
+                <label for="darkModeToggle" class="dark-mode-label">
+                    <span class="dark-mode-text">🌙</span>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <h1>🎯 Question Generator</h1>
+        </div>
+        
+        <div class="categories" id="categories">
+            <!-- Categories will be populated by JavaScript -->
+        </div>
+
+        <div class="spiciness-container">
+			<div class="spiciness-title">🌶️ Question Spiciness Range</div>
+			<div class="dual-slider-container">
+				<div class="slider-track"></div>
+				<input type="range" min="1" max="5" value="1" class="spiciness-slider min-slider" id="minSpicinessSlider">
+				<input type="range" min="1" max="5" value="5" class="spiciness-slider max-slider" id="maxSpicinessSlider">
+				<div class="spiciness-labels">
+					<span>Mild</span>
+					<span>Medium</span>
+					<span>Hot</span>
+					<span>Spicy</span>
+					<span>Smut</span>
+				</div>
+				<div class="spiciness-values">
+					<div class="spiciness-value">
+						Min: <span id="minSpicinessValue">Mild</span>
+					</div>
+					<div class="spiciness-value">
+						Max: <span id="maxSpicinessValue">Smut</span>
+					</div>
+				</div>
+				<div class="tooltip-container">
+					<div class="tooltip-trigger">
+						i
+						<div class="tooltip">
+							<h4>Spiciness Levels</h4>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Mild:</span>
+								<span class="tooltip-level-desc">Innocent questions about oneself. Ex: Age, Gender, Sexuality, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Medium:</span>
+								<span class="tooltip-level-desc">Light flirtation, mildly suggestive. Ex: </span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Hot:</span>
+								<span class="tooltip-level-desc">Moderately steamy questions. Ex: What are you wearing, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Spicy:</span>
+								<span class="tooltip-level-desc">Explicitly sexual and intimate scenarios. Ex: Ever eaten someone out, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Smut:</span>
+								<span class="tooltip-level-desc">Highly explicit, graphic and sexual. Ex:</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="kinkiness-container">
+			<div class="kinkiness-title">⛓ Question Kinkiness/Taboo Range</div>
+			<div class="dual-slider-container">
+				<div class="slider-track"></div>
+				<input type="range" min="1" max="5" value="1" class="kinkiness-slider min-slider" id="minKinkinessSlider">
+				<input type="range" min="1" max="5" value="5" class="kinkiness-slider max-slider" id="maxKinkinessSlider">
+				<div class="kinkiness-labels">
+					<span>Vanilla</span>
+					<span>Newbie</span>
+					<span>Perverted</span>
+					<span>Degenerate</span>
+					<span>Freak</span>
+				</div>
+				<div class="kinkiness-values">
+					<div class="kinkiness-value">
+						Min: <span id="minKinkinessValue">Vanilla</span>
+					</div>
+					<div class="kinkiness-value">
+						Max: <span id="maxKinkinessValue">Freak</span>
+					</div>
+				</div>
+				<div class="tooltip-container">
+					<div class="tooltip-trigger">
+						i
+						<div class="tooltip">
+							<h4>Kinkiness Levels</h4>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Vanilla:</span>
+								<span class="tooltip-level-desc">Common sexual activity. Ex: Dick sucking, Missionary, 69, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Newbie:</span>
+								<span class="tooltip-level-desc">Common fetishes, kinks and sexual preferences. Ex: Size difference, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Perverted:</span>
+								<span class="tooltip-level-desc">Slightly more taboo than common fetishes. Ex: Chastity, Age difference, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Degenerate:</span>
+								<span class="tooltip-level-desc">Uncommon or harsher/more taboo fetishes. Ex: Force feminization, Whiping, etc</span>
+							</div>
+							<div class="tooltip-level">
+								<span class="tooltip-level-name">Freak:</span>
+								<span class="tooltip-level-desc">Very taboo fetishes, sometimes almost illegal. Ex: Branding, Neutering, etc</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="generateQuestion()">Generate Question</button>
+            <button class="btn btn-secondary" onclick="resetQuestions()">Reset Used Questions</button>
+        </div>
+
+        <div class="specific-question-container">
+			<div class="specific-question-title">🎯 Get Specific Question</div>
+			<div class="specific-question-controls">
+				<input type="number" min="1" placeholder="Loading..." class="question-id-input" id="questionIdInput">
+				<button class="btn btn-accent" onclick="getSpecificQuestion()">Get Question #</button>
+			</div>
+		</div>
+
+		<div class="question-container">
+			<div class="question no-question" id="question">
+				Select categories above and click "Generate Question" to get started!
+			</div>
+		</div>
+
+        <div class="reset-warning" id="resetWarning">
+            All questions from selected categories have been used. Click "Reset Used Questions" to start over.
+        </div>
+
+        <div class="stats">
+            <span id="questionsUsed">Questions used: 0</span>
+            <span id="questionsAvailable">Available questions: 0</span>
+        </div>
+    </div>
+
+	<script src="questions.js"></script>
+	<script src="app.js"></script>
+
+</body>
+</html>

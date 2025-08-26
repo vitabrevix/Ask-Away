@@ -1,0 +1,136 @@
+/* Base styles and layout */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	min-height: 100vh;
+	padding: 20px;
+	color: #333;
+	transition: all 0.3s ease;
+}
+
+body.dark-mode {
+	background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+	color: #e2e8f0;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 20px;
+	padding: 30px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+body.dark-mode .container {
+    background: rgba(45, 55, 72, 0.95);
+}
+
+.header {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #4a5568;
+	margin-bottom: 30px;
+	font-size: 2.5rem;
+	font-weight: 700;
+}
+
+body.dark-mode h1 {
+    color: #e2e8f0;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.dark-mode-checkbox {
+    display: none;
+}
+
+.dark-mode-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.toggle-slider {
+    width: 50px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 34px;
+    margin-left: 10px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.dark-mode-checkbox:checked + .dark-mode-label .toggle-slider {
+    background-color: #38b2ac;
+}
+
+.dark-mode-checkbox:checked + .dark-mode-label .toggle-slider:before {
+    transform: translateX(24px);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+	.container {
+		padding: 20px;
+		margin: 10px;
+	}
+
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 25px;
+	}
+}
+
+/* Animations */
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
