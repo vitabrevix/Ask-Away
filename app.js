@@ -6,8 +6,8 @@ const kinkinessNames = ['', 'Vanilla', 'Newbie', 'Perverted', 'Degenerate', 'Fre
 // Category descriptions for tooltips
 const categoryDescriptions = {
 	'introduction': 'Mild, basic, sometimes filtration, sometimes funny. Just to know each other, not sexually.',
-    'lusty': 'Questions in case you are currently in a romantic relationship. Especially if you are playing with them rn.',
-    'bdsm': 'Questions in case you are currently in a romantic relationship. Especially if you are playing with them rn.',
+    'lusty': 'Generatic horny questions. From flirty or less flirty, but still.',
+    'bdsm': 'Questions specifcially for Dom/Sub or Sadist/Masochists and such.',
     'banana': 'Questions in case you have a... well a dick, a cock, a gock, a cum cannon, a crotch crowbar, pudding stirrer, a-.',
     'shell': 'Questions in case you have a... well a pussy, a vagina, a meat wallet, a tuna trench, a pudding pouch, a snatch hatch, a-',
     'couple': 'Questions in case you are currently in a romantic relationship. Especially if you are playing with them rn.',
