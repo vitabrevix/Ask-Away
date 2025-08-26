@@ -81,10 +81,11 @@ function loadSelectedCategories() {
 
 // Initialize the application
 function initializeApp() {
-    loadSelectedCategories(); // Load saved state first
+    loadSelectedCategories();
     createCategoryCheckboxes();
     setupSpicinessSlider();
     setupKinkinessSlider();
+    initializeSelectionMode();
     updateQuestionInputRange();
     updateStats();
 }
@@ -263,59 +264,6 @@ function toggleCategory(category, element) {
 	updateStats();
 }
 
-// Generate a new question
-function generateQuestion() {
-    if (selectedCategories.size === 0) {
-        alert('Please select at least one category first!');
-        return;
-    }
-
-    // Get all available questions from selected categories within spiciness and kinkiness range
-    let availableQuestions = [];
-    selectedCategories.forEach(category => {
-        if (questionDatabase[category]) {
-            questionDatabase[category].forEach(questionObj => {
-                // Only include questions within both spiciness and kinkiness ranges
-                if (questionObj.spiciness >= minSpiciness && questionObj.spiciness <= maxSpiciness &&
-                    questionObj.kinkiness >= minKinkiness && questionObj.kinkiness <= maxKinkiness) {
-                    const questionKey = questionObj.id.toString();
-                    if (!usedQuestions.has(questionKey)) {
-                        availableQuestions.push({
-                            id: questionObj.id,
-                            spiciness: questionObj.spiciness,
-                            kinkiness: questionObj.kinkiness,
-                            question: questionObj.question,
-                            category,
-                            key: questionKey
-                        });
-                    }
-                }
-            });
-        }
-    });
-
-    // Check if any questions are available
-    if (availableQuestions.length === 0) {
-        document.getElementById('resetWarning').style.display = 'block';
-        return;
-    }
-
-    // Hide reset warning
-    document.getElementById('resetWarning').style.display = 'none';
-
-    // Select random question
-    const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-    const selectedQuestion = availableQuestions[randomIndex];
-
-    // Mark question as used
-    usedQuestions.add(selectedQuestion.key);
-
-    // Display the question with ID, spiciness, and kinkiness levels
-    displayQuestion(selectedQuestion);
-
-    updateStats();
-}
-
 // Get specific question by ID
 function getSpecificQuestion() {
     const input = document.getElementById('questionIdInput');
@@ -395,24 +343,6 @@ function displayQuestion(questionObj) {
     container.style.animation = 'none';
     container.offsetHeight; // Trigger reflow
     container.style.animation = 'slideIn 0.5s ease-out';
-}
-
-// Reset used questions
-function resetQuestions() {
-	usedQuestions.clear();
-	document.getElementById('resetWarning').style.display = 'none';
-	
-	const questionElement = document.getElementById('question');
-	questionElement.innerHTML = 'Questions reset! Click "Generate Question" for a new one.';
-	questionElement.classList.add('no-question');
-	
-	// Remove any existing category info
-	const existingCategoryInfo = questionElement.parentNode.querySelector('.category-info');
-	if (existingCategoryInfo) {
-		existingCategoryInfo.remove();
-	}
-	
-	updateStats();
 }
 
 // Update statistics

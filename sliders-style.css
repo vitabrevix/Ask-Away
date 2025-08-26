@@ -1,7 +1,7 @@
 /* Slider components styles */
 
 /* Base slider container styles */
-.spiciness-container, .kinkiness-container {
+.spiciness-container, .kinkiness-container, .selection-mode-container {
 	background: #f7fafc;
 	border-radius: 12px;
 	padding: 20px;
@@ -12,12 +12,12 @@
 	z-index: auto;
 }
 
-.spiciness-container:hover, .kinkiness-container:hover {
+.spiciness-container:hover, .kinkiness-container:hover, .selection-mode-container:hover {
 	background: #dadada;
 	transform: translateY(-2px);
 }
 
-.spiciness-title, .kinkiness-title {
+.spiciness-title, .kinkiness-title, .selection-mode-title {
 	font-weight: 600;
 	font-size: 1.1rem;
 	margin-bottom: 15px;
@@ -28,7 +28,7 @@
 /* Dual slider container */
 .dual-slider-container {
     position: relative;
-    margin: 20px 0 10px 0;
+    /* margin: 20px 0 10px 0; */
 }
 
 .slider-track {
@@ -40,7 +40,7 @@
 }
 
 /* Base slider styles */
-.spiciness-slider, .kinkiness-slider {
+.spiciness-slider, .kinkiness-slider, .mode-slider {
 	width: 100%;
 	height: 8px;
 	background: linear-gradient(90deg, #68d391 0%, #f6e05e 25%, #ed8936 50%, #e53e3e 75%, #9b2c2c 100%);
@@ -52,7 +52,7 @@
 
 /* Dual slider positioning */
 .dual-slider-container .spiciness-slider,
-.dual-slider-container .kinkiness-slider {
+.dual-slider-container .kinkiness-slider{
 	position: absolute;
 	top: -9px;
 	background: transparent;
@@ -154,7 +154,7 @@
 }
 
 /* Slider labels and values */
-.spiciness-labels, .kinkiness-labels {
+.spiciness-labels, .kinkiness-labels, .mode-labels {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 10px;
@@ -190,12 +190,14 @@ body.dark-mode .kinkiness-container {
 }
 
 body.dark-mode .spiciness-container:hover,
-body.dark-mode .kinkiness-container:hover {
+body.dark-mode .kinkiness-container:hover,
+body.dark-mode .selection-mode-container:hover {
     background: #3f3768;
 }
 
 body.dark-mode .spiciness-title,
-body.dark-mode .kinkiness-title {
+body.dark-mode .kinkiness-title,
+body.dark-mode .selection-mode-title {
     color: #e2e8f0;
 }
 
@@ -268,9 +270,6 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     pointer-events: auto;
 }
 
-/* CRITICAL: These styles are still missing from sliders-style.css */
-
-/* 1. Missing: Proper dual slider container setup with pointer events fix */
 .dual-slider-container .spiciness-slider,
 .dual-slider-container .kinkiness-slider {
     position: absolute;
@@ -285,7 +284,6 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     pointer-events: none; /* This is the key fix! */
 }
 
-/* 2. Missing: Complete arrow thumb override for dual sliders */
 .dual-slider-container .spiciness-slider::-webkit-slider-thumb,
 .dual-slider-container .kinkiness-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -299,7 +297,6 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     position: relative;
 }
 
-/* 3. Missing: Specific min/max slider arrow styling with proper specificity */
 .dual-slider-container .min-slider::-webkit-slider-thumb {
     border-left: 18px solid #38b2ac;
     border-top: 12px solid transparent;
@@ -328,7 +325,6 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* 4. Missing: Firefox dual slider arrow thumbs with proper container specificity */
 .dual-slider-container .spiciness-slider::-moz-range-thumb,
 .dual-slider-container .kinkiness-slider::-moz-range-thumb {
     width: 0;
@@ -355,7 +351,6 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     transform: translateY(8px);
 }
 
-/* 5. Missing: Remove conflicting base styles for dual sliders */
 .dual-slider-container .spiciness-slider::-webkit-slider-thumb,
 .dual-slider-container .kinkiness-slider::-webkit-slider-thumb {
     /* Override the base circular thumb styles completely */
@@ -363,4 +358,82 @@ body.dark-mode .kinkiness-values .kinkiness-value {
     height: 0 !important;
     background: transparent !important;
     border-radius: 0 !important;
+}
+
+.mode-slider-container {
+	position: relative;
+	top: -9px;
+	background: transparent;
+	margin: 30px 0 10px 0;
+}
+
+
+.mode-slider::-moz-range-track {
+    background: transparent;
+    height: 40px;
+    border: none;
+}
+
+.mode-indicator {
+    position: absolute;
+    top: 8px;
+    left: 0%;
+    width: 26px;
+    height: 26px;
+    background: white;
+    border: 3px solid #4299e1;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.mode-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mode-slider::-moz-range-thumb,
+.mode-slider::-webkit-slider-thumb {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 100%;
+	border-color: #4299e1;
+	border: 3px solid #4299e1;
+}
+
+.mode-description {
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #2d3748;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(66, 153, 225, 0.1);
+    border-radius: 6px;
+    border-left: 4px solid #4299e1;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles */
+body.dark-mode .selection-mode-container {
+    background: #4a5568;
+}
+
+body.dark-mode .mode-description {
+    color: #e2e8f0;
+}
+
+body.dark-mode .mode-description.random {
+    background: rgba(66, 153, 225, 0.2);
+}
+
+body.dark-mode .mode-description.increasing {
+    background: rgba(237, 137, 54, 0.2);
+}
+
+body.dark-mode .mode-description.updown {
+    background: rgba(159, 122, 234, 0.2);
 }

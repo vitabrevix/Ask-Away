@@ -60,7 +60,7 @@
 							</div>
 							<div class="tooltip-level">
 								<span class="tooltip-level-name">Medium:</span>
-								<span class="tooltip-level-desc">Light flirtation, mildly suggestive. Ex: </span>
+								<span class="tooltip-level-desc">Light flirtation, mildly suggestive, or just less boring. Ex: </span>
 							</div>
 							<div class="tooltip-level">
 								<span class="tooltip-level-name">Hot:</span>
@@ -131,11 +131,26 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="selection-mode-container">
+			<div class="selection-mode-title">🎲 Question Selection Mode</div>
+			<div class="mode-slider-container">
+				<input type="range" min="0" max="2" value="0" class="mode-slider" id="modeSlider">
+				<div class="mode-labels">
+					<span>Random</span>
+					<span>Increasing</span>
+					<span>Up & Down</span>
+				</div>
+				<div class="mode-description" id="modeDescription">
+					Questions are selected completely at random
+				</div>
+			</div>
+		</div>
 
         <div class="controls">
-            <button class="btn btn-primary" onclick="generateQuestion()">Generate Question</button>
-            <button class="btn btn-secondary" onclick="resetQuestions()">Reset Used Questions</button>
-        </div>
+			<button class="btn btn-primary" onclick="generateQuestionWithMode()">Generate Question</button>
+			<button class="btn btn-secondary" onclick="resetQuestionsWithMode()">Reset Used Questions</button>
+		</div>
 
         <div class="specific-question-container">
 			<div class="specific-question-title">🎯 Get Specific Question</div>
@@ -162,6 +177,7 @@
     </div>
 
 	<script src="questions.js"></script>
+	<script src="question-selector.js"></script>
 	<script src="app.js"></script>
 
 </body>
