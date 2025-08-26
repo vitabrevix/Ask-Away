@@ -87,7 +87,21 @@ function initializeApp() {
     setupKinkinessSlider();
     initializeSelectionMode();
     updateQuestionInputRange();
+    
+    // Load URL settings AFTER everything is created
+    const urlSettings = decodeSettingsFromURL();
+    if (urlSettings) {
+        applySettingsFromURL(urlSettings);
+    }
+    
     updateStats();
+    
+    // Clean URL after loading settings (optional)
+    if (urlSettings) {
+        const cleanURL = new URL(window.location.href);
+        cleanURL.searchParams.delete('settings');
+        window.history.replaceState({}, document.title, cleanURL.toString());
+    }
 }
 
 // Setup spiciness slider
@@ -575,3 +589,167 @@ function updateQuestionInputRange() {
     // Update the placeholder text
     questionInput.placeholder = `Enter question ID (1-${highestId})`;
 }
+
+// Function to encode current settings to URL parameters
+function encodeSettingsToURL() {
+    const settings = {
+        categories: Array.from(selectedCategories),
+        minSpiciness: minSpiciness,
+        maxSpiciness: maxSpiciness,
+        minKinkiness: minKinkiness,
+        maxKinkiness: maxKinkiness,
+        selectionMode: currentSelectionMode || 0
+    };
+    
+    // Encode settings as base64 to make URL cleaner
+    const encoded = btoa(JSON.stringify(settings));
+    const currentURL = new URL(window.location.href);
+    currentURL.searchParams.set('settings', encoded);
+    
+    return currentURL.toString();
+}
+
+// Function to decode settings from URL parameters
+function decodeSettingsFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedSettings = urlParams.get('settings');
+    
+    if (!encodedSettings) {
+        return null;
+    }
+    
+    try {
+        const decoded = atob(encodedSettings);
+        return JSON.parse(decoded);
+    } catch (error) {
+        console.warn('Failed to decode settings from URL:', error);
+        return null;
+    }
+}
+
+// Function to apply settings from decoded URL
+function applySettingsFromURL(settings) {
+    if (!settings) return;
+    
+    // Apply categories
+    if (settings.categories && Array.isArray(settings.categories)) {
+        // Validate that the categories exist in the database
+        const validCategories = settings.categories.filter(cat => questionDatabase[cat]);
+        selectedCategories = new Set(validCategories);
+        saveSelectedCategories(); // Save the loaded settings
+    }
+    
+    // Apply spiciness range
+    if (typeof settings.minSpiciness === 'number' && settings.minSpiciness >= 1 && settings.minSpiciness <= 5) {
+        minSpiciness = settings.minSpiciness;
+        document.getElementById('minSpicinessSlider').value = minSpiciness;
+    }
+    if (typeof settings.maxSpiciness === 'number' && settings.maxSpiciness >= 1 && settings.maxSpiciness <= 5) {
+        maxSpiciness = settings.maxSpiciness;
+        document.getElementById('maxSpicinessSlider').value = maxSpiciness;
+    }
+    
+    // Apply kinkiness range
+    if (typeof settings.minKinkiness === 'number' && settings.minKinkiness >= 1 && settings.minKinkiness <= 5) {
+        minKinkiness = settings.minKinkiness;
+        document.getElementById('minKinkinessSlider').value = minKinkiness;
+    }
+    if (typeof settings.maxKinkiness === 'number' && settings.maxKinkiness >= 1 && settings.maxKinkiness <= 5) {
+        maxKinkiness = settings.maxKinkiness;
+        document.getElementById('maxKinkinessSlider').value = maxKinkiness;
+    }
+    
+    // Apply selection mode
+    if (typeof settings.selectionMode === 'number' && settings.selectionMode >= 0 && settings.selectionMode <= 2) {
+        document.getElementById('modeSlider').value = settings.selectionMode;
+        // Update the current selection mode variable if it exists
+        if (typeof currentSelectionMode !== 'undefined') {
+            currentSelectionMode = settings.selectionMode;
+        }
+    }
+    
+    // Update UI to reflect the loaded settings
+    updateSlidersUI();
+    updateCategoriesUI();
+    updateSelectionModeUI();
+}
+
+function updateSlidersUI() {
+    document.getElementById('minSpicinessValue').textContent = spicinessNames[minSpiciness];
+    document.getElementById('maxSpicinessValue').textContent = spicinessNames[maxSpiciness];
+    document.getElementById('minKinkinessValue').textContent = kinkinessNames[minKinkiness];
+    document.getElementById('maxKinkinessValue').textContent = kinkinessNames[maxKinkiness];
+}
+
+function updateCategoriesUI() {
+    Object.keys(questionDatabase).forEach(category => {
+        const categoryDiv = document.querySelector(`#${category}`).parentElement;
+        const checkbox = document.getElementById(category);
+        
+        if (selectedCategories.has(category)) {
+            checkbox.checked = true;
+            categoryDiv.classList.add('selected');
+        } else {
+            checkbox.checked = false;
+            categoryDiv.classList.remove('selected');
+        }
+    });
+}
+
+function updateSelectionModeUI() {
+    // This assumes you have a function to update the mode description
+    // You'll need to call the appropriate function from question-selector.js
+    if (typeof updateModeDescription === 'function') {
+        updateModeDescription();
+    }
+}
+
+async function shareSettings() {
+    const shareURL = encodeSettingsToURL();
+    
+    try {
+        await navigator.clipboard.writeText(shareURL);
+        
+        // Show feedback to user
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ Copied!';
+        button.disabled = true;
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }, 2000);
+        
+    } catch (error) {
+        // Fallback for browsers that don't support clipboard API
+        console.warn('Clipboard API not available, using fallback');
+        
+        // Create a temporary input element
+        const tempInput = document.createElement('input');
+        tempInput.value = shareURL;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        
+        try {
+            document.execCommand('copy');
+            
+            // Show feedback to user
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '✅ Copied!';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+            
+        } catch (fallbackError) {
+            alert('Failed to copy to clipboard. Please copy the URL manually:\n\n' + shareURL);
+        }
+        
+        document.body.removeChild(tempInput);
+    }
+}
+

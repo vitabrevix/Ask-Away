@@ -81,3 +81,10 @@ body.dark-mode .btn-secondary:hover {
 		font-size: 1.1rem;
 	}
 }
+
+.share-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
