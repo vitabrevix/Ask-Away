@@ -1,4 +1,4 @@
-/* Tooltip styles - Mobile-Optimized Fixed Version */
+/* Tooltip styles */
 .tooltip-container {
     position: relative;
     display: flex;
@@ -168,43 +168,7 @@
     }
 }
 
-/* Dark mode tooltip styles */
-body.dark-mode .tooltip-trigger, 
-body.dark-mode .category-tooltip-trigger {
-    background: #4fd1c7;
-    color: #1a202c;
-}
-
-body.dark-mode .tooltip-trigger:hover, 
-body.dark-mode .category-tooltip-trigger:hover {
-    background: #38b2ac;
-}
-
-body.dark-mode .tooltip, 
-body.dark-mode .category-tooltip {
-    background: #1a202c;
-    border: 1px solid #4a5568;
-}
-
-body.dark-mode .tooltip::before, 
-body.dark-mode .category-tooltip::before {
-    border-top-color: #1a202c;
-}
-
-/* Ensure parent containers don't interfere */
-.category-item {
-    position: relative;
-    z-index: auto;
-}
-
-.spiciness-container, 
-.kinkiness-container, 
-.specific-question-container {
-    position: relative;
-    z-index: auto;
-}
-
-/* Improved touch behavior for mobile devices */
+/* Touch behavior for mobile devices */
 @media (hover: none) and (pointer: coarse) {
     .tooltip-trigger, .category-tooltip-trigger {
         position: relative;
@@ -232,32 +196,9 @@ body.dark-mode .category-tooltip::before {
     }
 }
 
-/* Very small screens - even more compact */
-@media (max-width: 480px) {
-    .tooltip, .category-tooltip {
-        left: 10px !important;
-        right: 10px !important;
-        font-size: 13px;
-        padding: 18px;
-        max-height: 85vh !important;
-    }
-    
-    .tooltip-level-name {
-        font-size: 12px;
-    }
-    
-    .tooltip-level-desc {
-        font-size: 13px;
-    }
-    
-    .tooltip h4, .category-tooltip h4 {
-        font-size: 15px;
-    }
-}
-
-/* Mobile - FIXED compact but readable tooltips */
+/* Mobile */
 @media (max-width: 767px) {
-	/* Ensure parent containers don't cause overflow */
+    /* Ensure parent containers don't cause overflow */
     .container {
         overflow-x: hidden !important;
         position: relative;
@@ -273,24 +214,32 @@ body.dark-mode .category-tooltip::before {
         overflow: visible !important;
         position: relative;
     }
+	
+	.category-tooltip {
+		position: fixed !important;
+	}
     
     .tooltip, .category-tooltip {
-		/* Add max-height and scroll capability */
-		max-height: 80vh !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        
+        /* Remove all position dependencies */
+        margin: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        
+        /* Consistent sizing regardless of button position */
+        width: 90vw !important;
+        max-width: 400px !important;
+        min-width: 280px !important;
+        max-height: 80vh !important;
         overflow-y: auto !important;
         
-        /* Reset all width constraints */
-        width: auto !important;
-        min-width: 250px !important;
-        max-width: min(90vw, 400px) !important;
-        max-height: 80vh !important;
-        margin: 0 !important;
-		
-		/* Content styling */
+        /* Content styling */
         font-size: 14px;
-        padding: 0px 25px 20px 20px;
+        padding: 20px 25px 20px 20px;
         line-height: 1.5;
-        overflow-y: auto;
         
         /* Normal text wrapping only */
         word-wrap: break-word;
@@ -304,13 +253,13 @@ body.dark-mode .category-tooltip::before {
         border-radius: 12px;
         
         z-index: 999999 !important;
-		
-		/* Better scrollbar styling */
+        
+        /* Better scrollbar styling */
         scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
     }
 	
-    /* Arrow positioning for mobile fixed tooltips */
+	/* Arrow positioning for mobile fixed tooltips */
     .tooltip::before, .category-tooltip::before {
         display: none; /* Hide arrow on mobile for simplicity */
     }
@@ -322,7 +271,7 @@ body.dark-mode .category-tooltip::before {
         padding-bottom: 12px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         gap: 5px;
-		flex-shrink: 0;
+        flex-shrink: 0;
     }
     
     .tooltip-level:last-child {
@@ -334,11 +283,10 @@ body.dark-mode .category-tooltip::before {
         font-size: 13px;
         font-weight: 600;
         color: #4fd1c7;
-        white-space: nowrap;
-		white-space: normal;
+        white-space: normal;
         word-break: break-word;
     }
-	
+    
     .tooltip-level-desc {
         font-size: 14px;
         color: #e2e8f0;
@@ -354,15 +302,14 @@ body.dark-mode .category-tooltip::before {
         word-wrap: break-word;
         text-align: center;
         color: #4fd1c7;
-		flex-shrink: 0;
+        flex-shrink: 0;
     }
-	
+    
     /* Mobile touch behavior improvement */
     .tooltip-trigger, .category-tooltip-trigger {
         touch-action: manipulation;
         -webkit-touch-callout: none;
     }
-	
     
     /* Custom scrollbar for webkit browsers */
     .tooltip::-webkit-scrollbar, 
@@ -397,7 +344,6 @@ body.dark-mode .category-tooltip::before {
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        /* background: rgba(255, 255, 255, 0.1); */
         transition: all 0.2s ease;
     }
     
@@ -405,6 +351,81 @@ body.dark-mode .category-tooltip::before {
         background: rgba(255, 255, 255, 0.2);
         color: white;
     }
+    
+    /* Optional: Add backdrop overlay for better focus */
+    .tooltip-trigger:active::before,
+    .category-tooltip-trigger:active::before,
+    .tooltip-trigger:focus::before,
+    .category-tooltip-trigger:focus::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999998;
+        pointer-events: none;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .tooltip, .category-tooltip {
+        left: 10px !important;
+        right: 10px !important;
+        font-size: 13px;
+        padding: 18px;
+        max-height: 85vh !important;
+    }
+    
+    .tooltip-level-name {
+        font-size: 12px;
+    }
+    
+    .tooltip-level-desc {
+        font-size: 13px;
+    }
+    
+    .tooltip h4, .category-tooltip h4 {
+        font-size: 15px;
+    }
+}
+
+/* Dark mode tooltip styles */
+body.dark-mode .tooltip-trigger, 
+body.dark-mode .category-tooltip-trigger {
+    background: #4fd1c7;
+    color: #1a202c;
+}
+
+body.dark-mode .tooltip-trigger:hover, 
+body.dark-mode .category-tooltip-trigger:hover {
+    background: #38b2ac;
+}
+
+body.dark-mode .tooltip, 
+body.dark-mode .category-tooltip {
+    background: #1a202c;
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .tooltip::before, 
+body.dark-mode .category-tooltip::before {
+    border-top-color: #1a202c;
+}
+
+/* Ensure parent containers don't interfere */
+.category-item {
+    position: relative;
+    z-index: auto;
+}
+
+.spiciness-container, 
+.kinkiness-container, 
+.specific-question-container {
+    position: relative;
+    z-index: auto;
 }
 
 /* Use container hover instead of individual element hover */
