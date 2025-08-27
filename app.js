@@ -11,7 +11,8 @@ const categoryDescriptions = {
     'banana': 'Questions in case you have a... well a dick, a cock, a gock, a cum cannon, a crotch crowbar, pudding stirrer, a moisture missile, a beef bayonet, a beaver basher, a-.',
     'shell': 'Questions in case you have a... well a pussy, a vagina, a meat wallet, a tuna trench, a pudding pouch, a snatch hatch, a pink portal, a whispering eye, a groin garage, a-',
     'couple': 'Questions in case you are currently in a romantic relationship. Especially if you are playing with them rn.',
-    'wouldyourather': 'Choice-based questions presenting two options, often exploring preferences and hypothetical scenarios.',
+    'petplay': 'Questions specifically related to petplay.',
+    'wouldyourather': 'Choice-based questions.',
 };
 
 // Tooltip css

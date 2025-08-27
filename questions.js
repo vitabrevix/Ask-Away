@@ -54,9 +54,9 @@ const questionDatabase = {
 		{ id: 50, kinkiness: 1, spiciness: 2, question: "What's a relationship red flag you ignored? (friendship is a relationship too silly)" },
 		{ id: 51, kinkiness: 1, spiciness: 2, question: "Ever been on a date or had a partner?" },
 		{ id: 52, kinkiness: 1, spiciness: 2, question: "What's the biggest lie you've told in a relationship?" },
-		{ id: 53, kinkiness: 1, spiciness: 2, question: "What's your addiction?" },
+		{ id: 53, kinkiness: 1, spiciness: 2, question: "What's your Soma? (Your happy pill from \"Brave New World\" (Your addiction)) " },
 		{ id: 54, kinkiness: 1, spiciness: 2, question: "Have you tried drugs? What's the best and worst ones you tried?" },
-		{ id: 55, kinkiness: 1, spiciness: 2, question: "Ever got in a searious fight?" },
+		{ id: 55, kinkiness: 1, spiciness: 2, question: "Ever got in a serious fight?" },
 		{ id: 56, kinkiness: 1, spiciness: 2, question: "Do you pull all-nighters? How often?" },
 		{ id: 57, kinkiness: 1, spiciness: 2, question: "What's the most fun event you've ever been to? Concert, Theater, Sports, etc" },
 		{ id: 58, kinkiness: 1, spiciness: 2, question: "What's your most embarassing possession?" },
@@ -65,57 +65,128 @@ const questionDatabase = {
 		{ id: 61, kinkiness: 1, spiciness: 2, question: "What's your most technologically advanced possession?" },
 		{ id: 62, kinkiness: 1, spiciness: 2, question: "Wild card question. Now you get to make the question, but non-sexual" },
 		{ id: 63, kinkiness: 1, spiciness: 2, question: "Which animal represents you best Non-sexually? (shu horny puppies, that's for later)" },
+		{ id: 64, kinkiness: 4, spiciness: 4, question: "Ever tried hypnosis? The real kind I mean. What's your thoughts on it?" },
 	],
 	lusty: [
-		{ id: 63, kinkiness: 1, spiciness: 2, question: "When are you more likely to go \"Awhooooooooga\"? With looking a feminine lasses or masculine lads?" },
-		{ id: 64, kinkiness: 1, spiciness: 2, question: "Favorite body part (not genitals), and why?" },
-		{ id: 65, kinkiness: 1, spiciness: 2, question: "How possessive are you? How much would you love/hate if someone was posessive of you?" },
-		{ id: 66, kinkiness: 1, spiciness: 2, question: "Favorite (horny) superpower, and why?" },
-		{ id: 67, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 65, kinkiness: 1, spiciness: 2, question: "When are you more likely to go \"Awhooooooooga\"? Looking at feminine lasses or masculine lads?" },
+		{ id: 66, kinkiness: 1, spiciness: 2, question: "Favorite body part (not genitals), and why?" },
+		{ id: 67, kinkiness: 1, spiciness: 2, question: "How possessive are you? How much would you love/hate if someone was posessive of you?" },
+		{ id: 68, kinkiness: 1, spiciness: 2, question: "Virgin? One timer? The sluttiest of them all? (We love you all regardless <3)" },
+		{ id: 69, kinkiness: 1, spiciness: 4, question: "I mean of course this was a question, 69 or are you a pussy?" },
+		{ id: 70, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 71, kinkiness: 1, spiciness: 2, question: "Have you ever been seen naked by someone not blood related?" },
+		{ id: 72, kinkiness: 1, spiciness: 2, question: "Do you have sex toys? (What about non-sex toys?)" },
+		{ id: 73, kinkiness: 1, spiciness: 2, question: "Do you use lube? How much do you have right now?~" },
+		{ id: 74, kinkiness: 1, spiciness: 2, question: "From 1 to 10, how horny are you right now?" },
+		{ id: 75, kinkiness: 1, spiciness: 2, question: "Ever sexted before? Roleplay/fantasy or real sexting?" },
+		{ id: 76, kinkiness: 1, spiciness: 2, question: "Which animal represents you best sexually? (its sexual behaviour, the way they procreate, etc)" },
 		
-		{ id: 69, kinkiness: 1, spiciness: 3, question: "I mean of course this was a question, 69 or are you a pussy?" },
-		{ id: 70, kinkiness: 1, spiciness: 3, question: "Gentle vs harsh treatmet in bed?" },
-		{ id: 71, kinkiness: 1, spiciness: 3, question: "Fav sex toy? Do you have one?" },
-		{ id: 72, kinkiness: 1, spiciness: 3, question: "Do you watch porn? If so, Favorite tag?" },
-		{ id: 73, kinkiness: 1, spiciness: 3, question: "Real porn vs Hentai vs 3D?" },
-		{ id: 74, kinkiness: 1, spiciness: 3, question: "Fav sex position?" },
-		{ id: 74, kinkiness: 1, spiciness: 3, question: "Fav sex position?" },
+		{ id: 77, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 78, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 79, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 80, kinkiness: 1, spiciness: 3, question: "Gentle vs harsh treatmet in bed?" },
+		{ id: 81, kinkiness: 1, spiciness: 3, question: "Fav sex toy? Do you have one, or d oyou wish you had it? How often do you use it/would use it?" },
+		{ id: 82, kinkiness: 1, spiciness: 3, question: "Do you watch porn? If so, Favorite tag?" },
+		{ id: 83, kinkiness: 1, spiciness: 3, question: "Real porn vs Hentai vs 3D?" },
+		{ id: 84, kinkiness: 1, spiciness: 3, question: "What underwear are yo ucurrently wearing?" },            
+		{ id: 85, kinkiness: 1, spiciness: 3, question: "Last time you were horny? How long ago?~" },
+		{ id: 86, kinkiness: 1, spiciness: 3, question: "What non-sexual thing never fails to get you horny?" },
+		{ id: 87, kinkiness: 1, spiciness: 3, question: "When have you been the horniest ever?" },
+		{ id: 88, kinkiness: 1, spiciness: 3, question: "Have you ever sent nudes? With face or without?" },
+		{ id: 89, kinkiness: 1, spiciness: 3, question: "Have you ever received nudes? (that you asked for)" },
+		{ id: 90, kinkiness: 1, spiciness: 3, question: "Favorite (horny) superpower, and why?" },
+		{ id: 91, kinkiness: 1, spiciness: 3, question: "Most embarassing sexual story?" },
+		{ id: 92, kinkiness: 1, spiciness: 3, question: "Can you remember your strongest orgasm ever? (Tell us, tell us, tell us, tell-)" },
+		{ id: 93, kinkiness: 1, spiciness: 3, question: "Protected or un-protected sex?" },
+		{ id: 94, kinkiness: 1, spiciness: 3, question: "Ever played a strip game?" },
+		{ id: 95, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 96, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 97, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 98, kinkiness: 1, spiciness: 3, question: "" },
+		{ id: 99, kinkiness: 1, spiciness: 3, question: "" },
 		{ id: 100, kinkiness: 1, spiciness: 3, question: "Wild card question. Now you get to make the question, and very sexual~" },
+		
+		{ id: 101, kinkiness: 1, spiciness: 4, question: "How often do you have sex?" },
+		{ id: 102, kinkiness: 1, spiciness: 4, question: "Fav sex position?" },
+		{ id: 103, kinkiness: 2, spiciness: 4, question: "Ever masturbated in public? (sneakily or not)" },
+		{ id: 104, kinkiness: 1, spiciness: 4, question: "Ever fingered your backdoor?" },
+		{ id: 105, kinkiness: 1, spiciness: 4, question: "Ever given a sucky sucky? Ever polished the pole? Ever gargled the gherkin? Ever used your moist harmonica?" },
+		{ id: 106, kinkiness: 1, spiciness: 4, question: "Ever gave a handy? Ever played with someone's flesh joysticking? Ever gave a meat maraca shaking?" },
+		{ id: 107, kinkiness: 1, spiciness: 4, question: "Ever fingered someone? If so, both holes, or only one?" },
+		{ id: 108, kinkiness: 1, spiciness: 4, question: "Thoughts on anal? Had an experience yet?" },
+		{ id: 109, kinkiness: 2, spiciness: 4, question: "What about pegging, hm? Ever got Pogo-sticked? Ever done some butt jousting?" },
+		{ id: 110, kinkiness: 1, spiciness: 4, question: "Ever had hot steamy same sex experience?" },
+		{ id: 111, kinkiness: 2, spiciness: 4, question: "Ever given a rimjob, ever kissen the brown flower? What about receiving one?" },
+		{ id: 112, kinkiness: 1, spiciness: 4, question: "Ever had sex in public? (Balcony, behind some bushes, bathroom, etc etc)" },
+		{ id: 113, kinkiness: 1, spiciness: 4, question: "How do you masturbate? (Go in as much detail as scientifically possible)" },
+		{ id: 114, kinkiness: 1, spiciness: 4, question: "How often do you masturbate? And what's the maximum amount of times you have masturbated in one single day?" },
+		{ id: 115, kinkiness: 1, spiciness: 4, question: "Have you ever been caught masturbating?" },
+		{ id: 116, kinkiness: 1, spiciness: 4, question: "Ever streamed/recorded yourself masturbating for someone else to see?" },
+		{ id: 117, kinkiness: 1, spiciness: 4, question: "" },
+		
+		{ id: 149, kinkiness: 2, spiciness: 4, question: "What about natural body musk? Are you into it? If so, what part of the body smells the best? The most potent and alluring?" },
+		{ id: 150, kinkiness: 3, spiciness: 4, question: "Thoughts about pet play? Would you be a pet or an owner/caretaker?" },
+		{ id: 151, kinkiness: 3, spiciness: 4, question: "Does making someone sleep in a dog crate sound hot? What about you sleeping in one? (be honest)" },
+		{ id: 152, kinkiness: 3, spiciness: 4, question: "Thoughts about chastity? Would you lock yourself for someone?" },
+		{ id: 153, kinkiness: 3, spiciness: 4, question: "Would you keep someone under chastity? Keep their keys, tease them incesantly knowing they cannot release themselves without your say so?" },
+		
+		{ id: 175, kinkiness: 4, spiciness: 4, question: "What about mind control? Would you love having your thoughts controlled without a way to resist? What about the opposite? What would you do if you could control someone's body with your words alone?" },
+		{ id: 176, kinkiness: 4, spiciness: 4, question: "Ever tried erotic hypnosis? The real kind" },
+		
 		
 	],
 	bdsm: [
-		{ id: 101, kinkiness: 2, spiciness: 2, question: "Ever been in a serious Dom/sub relationship?" },
-		{ id: 102, kinkiness: 2, spiciness: 2, question: "" },
+		{ id: 201, kinkiness: 2, spiciness: 4, question: "Ever been in a serious Dom/sub relationship?" },
+		{ id: 202, kinkiness: 2, spiciness: 4, question: "Sub? Dom? Switch leaning sub? Switch leaning dom?" },
+		{ id: 203, kinkiness: 2, spiciness: 4, question: "Did you try being a sub? What about a dom?" },
+		{ id: 204, kinkiness: 2, spiciness: 4, question: "Thoughts on role reversal? The always confident dom becoming a pathetic little nervous wreck, while the always subby takes control, does that sound fun?~~" },
 		
-		{ id: 103, kinkiness: 2, spiciness: 3, question: "" },		
+		{ id: 230, kinkiness: 4, spiciness: 4, question: "Thoughts on light CBT? Does lightly slapping someone's balls and watching as they shiver in pain and pleasure sound hot?" },
 		
 	],
 	couple: [
-		{ id: 141, kinkiness: 1, spiciness: 2, question: "What's your favorite thing about your partner? What about the least favorite?" },
-		{ id: 142, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 241, kinkiness: 1, spiciness: 2, question: "What's your favorite thing about your partner? What about the least favorite?" },
+		{ id: 242, kinkiness: 1, spiciness: 2, question: "" },
 		
-		{ id: 143, kinkiness: 1, spiciness: 3, question: "" },		
+		{ id: 243, kinkiness: 1, spiciness: 3, question: "" },	
+		
+		{ id: 244, kinkiness: 1, spiciness: 4, question: "What's the hottest thing you've done with your parther?" },		
 		
 	],
 	banana: [
-		{ id: 181, kinkiness: 1, spiciness: 2, question: "" },
-		{ id: 182, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 281, kinkiness: 1, spiciness: 2, question: "Ever got yourself a sucked off?" },
+		{ id: 282, kinkiness: 1, spiciness: 2, question: "Ever got a handjob?" },
 		
-		{ id: 183, kinkiness: 1, spiciness: 3, question: "" },		
+		{ id: 283, kinkiness: 1, spiciness: 3, question: "" },		
+		
+		{ id: 300, kinkiness: 4, spiciness: 4, question: "Thoughts on light CBT? Does being spanked with the inclusion of your testies, or being told to slap your testies with a dildo until you cum sound hot?" },
+		
 		
 	],
 	shell: [
-		{ id: 221, kinkiness: 1, spiciness: 2, question: "" },
-		{ id: 222, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 321, kinkiness: 1, spiciness: 2, question: "Ever got eaten out?" },
+		{ id: 322, kinkiness: 1, spiciness: 2, question: "Ever got fingered?" },
 		
-		{ id: 223, kinkiness: 1, spiciness: 3, question: "" },		
+		{ id: 323, kinkiness: 1, spiciness: 3, question: "" },		
+		
+
+		
+	],
+	petplay: [
+		{ id: 361, kinkiness: 3, spiciness: 3, question: "" },
+		{ id: 362, kinkiness: 3, spiciness: 4, question: "" },
 		
 	],
 	wouldyourather: [
-		{ id: 261, kinkiness: 1, spiciness: 2, question: "" },
-		{ id: 262, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 400, kinkiness: 1, spiciness: 2, question: "" },
+		{ id: 401, kinkiness: 1, spiciness: 2, question: "" },
 		
-		{ id: 263, kinkiness: 1, spiciness: 3, question: "" },		
+		{ id: 421, kinkiness: 1, spiciness: 3, question: "" },		
+		
+		{ id: 441, kinkiness: 1, spiciness: 4, question: "Would you rather have a succubuss tatto so that your sexual partner feels all that you feel, OR, so that you can feel all that they feel?" },		
+		
+		{ id: 461, kinkiness: 1, spiciness: 5, question: "Would you rather have hot steaming sexting rn, OR.. there is no or" },		
+		{ id: 462, kinkiness: 1, spiciness: 5, question: "" },		
 		
 	],
 };
