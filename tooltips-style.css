@@ -128,8 +128,6 @@
     overflow-wrap: break-word;
 }
 
-
-
 /* Desktop - larger tooltips */
 @media (min-width: 1024px) {
     .tooltip, .category-tooltip {
@@ -196,7 +194,7 @@
     }
 }
 
-/* Mobile */
+/* Mobile - small tooltips */
 @media (max-width: 767px) {
     /* Ensure parent containers don't cause overflow */
     .container {
@@ -205,20 +203,12 @@
     }
     
     .spiciness-container, 
-    .kinkiness-container {
-        overflow: visible !important;
-        position: relative;
-    }
-    
-    .dual-slider-container {
+    .kinkiness-container,
+	.dual-slider-container	{
         overflow: visible !important;
         position: relative;
     }
 	
-	.category-tooltip {
-		position: fixed !important;
-	}
-    
     .tooltip, .category-tooltip {
         top: 50% !important;
         left: 50% !important;
@@ -230,7 +220,7 @@
         bottom: auto !important;
         
         /* Consistent sizing regardless of button position */
-        width: 90vw !important;
+        width: 75vw !important;
         max-width: 400px !important;
         min-width: 280px !important;
         max-height: 80vh !important;
@@ -328,7 +318,7 @@
         border-radius: 3px;
     }
     
-    /* Add close button for mobile tooltips */
+    /* Close button for mobile tooltips */
     .tooltip::after, .category-tooltip::after {
         content: '×';
         position: absolute;
@@ -350,22 +340,6 @@
     .tooltip::after:hover, .category-tooltip::after:hover {
         background: rgba(255, 255, 255, 0.2);
         color: white;
-    }
-    
-    /* Optional: Add backdrop overlay for better focus */
-    .tooltip-trigger:active::before,
-    .category-tooltip-trigger:active::before,
-    .tooltip-trigger:focus::before,
-    .category-tooltip-trigger:focus::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.3);
-        z-index: 999998;
-        pointer-events: none;
     }
 }
 
