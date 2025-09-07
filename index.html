@@ -24,14 +24,14 @@
             <h1>🎯 Question Generator</h1>
         </div>
 		
-		<div class="controls">
-			<button class="btn btn-primary" onclick="generateQuestionWithMode()">Generate Question</button>
-			<button class="btn btn-secondary" onclick="resetQuestionsWithMode()">Reset Used Questions</button>
-		</div>
 		
-		<div class="reset-warning" id="resetWarning">
-            All questions from selected categories have been used. Click "Reset Used Questions" to start over.
-        </div>
+		<div class="specific-question-container">
+			<div class="specific-question-title">🎯 Get Random Question</div>
+			<div class="specific-question-controls">
+				<button class="btn btn-primary" onclick="generateQuestionWithMode()">Random Question</button>
+			</div>
+			
+		</div>
 
         <div class="specific-question-container">
 			<div class="specific-question-title">🎯 Get Specific Question</div>
@@ -40,10 +40,14 @@
 				<button class="btn btn-accent" onclick="getSpecificQuestion()">Get Question #</button>
 			</div>
 		</div>
+		
+		<div class="reset-warning" id="resetWarning">
+            All questions from selected categories have been used. Click "Reset Used Questions" to start over.
+        </div>
 
 		<div class="question-container">
 			<div class="question no-question" id="question">
-				Select categories below and click "Generate Question" to get started!
+				Select categories below and click "Random Question" to get started!
 			</div>
 		</div>
 		
@@ -54,6 +58,7 @@
 		
 		<div class="share-container">
 			<button class="btn btn-accent" onclick="shareSettings()">📋 Share Settings</button>
+			<button class="btn btn-secondary" onclick="resetQuestionsWithMode()">Reset Used Questions</button>
 		</div>
         
         <div class="categories" id="categories">
